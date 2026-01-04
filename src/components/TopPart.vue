@@ -3,12 +3,17 @@
 <template>
 
     <div class="top_part">
-        <div class="top_part_title">
-            <h1>Student Portfolio Help </h1>
+        <div class="top_part_margin">
+
+            <div class="top_part_title">
+                <h1>Student Portfolio Help </h1>
+            </div>
+            <img src="/images/menu.svg" alt="Menu" class="menu-icon" @click="setPage('main_menu')" />
+            <!-- <button class="nav-btn" @click="goToDetails">
+                Go to Details
+            </button> -->
+
         </div>
-        <button class="nav-btn" @click="goToDetails">
-            Go to Details
-        </button>
     </div>
 
 </template>
@@ -18,10 +23,8 @@
 
     const emit = defineEmits(['changePage']);
 
-    const goToDetails = () => {
-        // Send the event 'changePage' with the value 'details'
-        emit('changePage', 'details');
-    };
+    import { useNavigation } from '@/composables/useNavigation';
+    const { currentPage, setPage } = useNavigation();
 
 </script>
 
@@ -41,8 +44,30 @@
         box-shadow: 2px 0px 16px 0px #e5e5e5;
     }
 
+    .top_part_margin {
+        width: 90%;
+        max-width: 800px;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
     h1 {
         font-size: 1.7rem;
+    }
+
+    @media (width <= 420px) {
+        h1 {
+            font-size: 1.4rem;
+        }
+    }
+
+    .menu-icon {
+
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+
     }
 
 </style>

@@ -9,19 +9,19 @@
         <div class="card_holder">
 
             <CategoryCard 
-            title="onsite" 
-            icon="⛺" 
-            :image="imagess"
-            :is-active="selected === 'openhouse'"
-            @clicked="emit('changePage', 'openhouse')"
-            />
-
-            <CategoryCard 
             title="online" 
             icon="⛺" 
             :image="imagess"
-            :is-active="selected === 'openhouse'"
-            @clicked="emit('changePage', 'openhouse')"
+            :is-active="selected === 'online'"
+            @clicked="setPage('online')"
+            />
+
+            <CategoryCard 
+            title="onsite" 
+            icon="⛺" 
+            :image="imagess"
+            :is-active="selected === 'onsite'"
+            @clicked="setPage('onsite')"
             />
 
             <CategoryCard 
@@ -29,15 +29,15 @@
             icon="⛺" 
             :image="imagess"
             :is-active="selected === 'openhouse'"
-            @clicked="emit('changePage', 'openhouse')"
+            @clicked="setPage('openhouse')"
             />
 
             <CategoryCard 
             title="guide" 
             icon="⛺" 
             :image="imagess"
-            :is-active="selected === 'openhouse'"
-            @clicked="emit('changePage', 'openhouse')"
+            :is-active="selected === '0guide'"
+            @clicked="setPage('oguide')"
             />
 
         </div>
@@ -51,17 +51,18 @@
 
 <script setup>
 
-    import imagess from '/images/header.jpeg';
+    import imagess from '/images/icon.png';
 
     import CategoryCard from '@/components/CategoryCard.vue';
 
-    const emit = defineEmits(['changePage']);
+    import { useNavigation } from '@/composables/useNavigation';
+    const { currentPage, setPage } = useNavigation();
 
 
 </script>
 
 
-<style scoped>
+<style>
 
     .main_menu {
         width: 100%;
@@ -74,7 +75,7 @@
     }
 
     .header {
-        margin: 32px 0;
+        margin-top: 32px;
         width: 90%;
         max-width: 800px;
         object-fit: contain;
@@ -88,9 +89,12 @@
         max-width: 800px;
 
         height: calc(32dvh + 16px);
+        margin-top: 32px;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
+        /* grid-auto-columns: 50%;
+        grid-auto-flow: row; */
         gap: 16px;
 
         /* background-color: brown; */
@@ -105,9 +109,10 @@
 
     .category_card {
         width: 100%;
+        min-width: 0;
         height: 100%;
-        box-sizing: border-box;  
-        margin: 0;
+        min-height: 0;
+        box-sizing: border-box;
     }
 
 </style>
