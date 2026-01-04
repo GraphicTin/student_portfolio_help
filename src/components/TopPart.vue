@@ -39,9 +39,9 @@
         justify-content: center;
         align-items: center;
 
-        background-color: #b2f3d0;
-        border-bottom: 2px solid #87d3aa;
-        box-shadow: 2px 0px 16px 0px #e5e5e5;
+        background-color: var(--color-border-background-primary);
+        border-bottom: 2px solid var(--color-border-primary);
+        box-shadow: 2px 0px 16px 0px var(--color-boxshadow-primary);
     }
 
     .top_part_margin {

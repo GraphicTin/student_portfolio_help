@@ -36,7 +36,7 @@ defineEmits(['clicked']);
         justify-content: center;
         align-items: center; */
 
-        border: 2px solid #87d3aa;
+        border: 2px solid var(--color-border-primary);
         /* box-shadow: 0px 8px 8px 1px #d7d7d7; */
 
         border-radius: 8px;
@@ -57,7 +57,6 @@ defineEmits(['clicked']);
         transform: translateY(-5px);
         border-color: #7080fd; 
         box-shadow: 0px 0px 2px 0px #7080fd;
-        /* box-shadow: 0px 2px 2px 2px #e4e4e4; */
     }
 
     .card_title {

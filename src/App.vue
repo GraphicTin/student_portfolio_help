@@ -22,14 +22,15 @@
 
     import { useNavigation } from '@/composables/useNavigation';
     const  { currentPage, setPage } = useNavigation();
+    import { useLocalStorage } from '@vueuse/core';
 
     import TopPart from '@/components/TopPart.vue';
 
-    import MainMenu  from '@/components/MainMenu.vue'  ;
-    import Online    from '@/components/Online.vue'    ;
-    import Onsite    from '@/components/Onsite.vue'    ;
-    import Openhouse from '@/components/Openhouse.vue' ;
-    import Oguide    from '@/components/Oguide.vue'    ;
+    import MainMenu  from '@/pages/MainMenu.vue'  ;
+    import Online    from '@/pages/Online.vue'    ;
+    import Onsite    from '@/pages/Onsite.vue'    ;
+    import Openhouse from '@/pages/Openhouse.vue' ;
+    import Oguide    from '@/pages/Oguide.vue'    ;
 
     // Map the string name to the actual Component Object
     const tabs = {
@@ -49,7 +50,7 @@
 
 
     onMounted(() => {
-        setPage('main_menu');
+        setPage(useLocalStorage('inPage', 'main_menu').value);
     });
 
 </script>

@@ -80,7 +80,7 @@
         max-width: 800px;
         object-fit: contain;
         border-radius: 8px;
-        border: 2px solid #87d3aa;
+        border: 2px solid var(--color-border-primary);
     }
 
     .card_holder {
