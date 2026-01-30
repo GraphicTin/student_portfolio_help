@@ -7,9 +7,10 @@ import { useLocalStorage } from '@vueuse/core';
 const currentPage = ref('home');
 
 export function useNavigation() {
-    const setPage = (pageName) => {
+    const setPage = (pageName, writeToLocalStorage = true) => {
         currentPage.value = pageName;
-        useLocalStorage('inPage', 'main_menu').value = pageName;
+        if (writeToLocalStorage) { useLocalStorage('inPage', 'main_menu').value = pageName; }
+        
     };
 
     return {
