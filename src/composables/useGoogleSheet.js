@@ -9,17 +9,13 @@ export function useGoogleSheet() {
     const isLoading = ref(false);
     const error = ref(null);
 
-    /**
-     * Fetches data from the current active sheet
-     * @param {string} range - e.g., 'A1:E'
-     */
-    const fetchData = async (range = 'A1:Z') => {
+    const fetchData = async (range = 'A1:Z', sheetOverride = null) => {
         isLoading.value = true;
         error.value = null;
-        
         try {
             const params = new URLSearchParams({
-                sheetName: currentPage.value, // uses the global state
+                // Priority: Manual override (e.g., 'online') -> Global state
+                sheetName: sheetOverride || currentPage.value,
                 area: range
             });
 
@@ -27,37 +23,30 @@ export function useGoogleSheet() {
             const result = await response.json();
 
             if (result.error) throw new Error(result.error);
-            return result.data;
+
+            // UNWRAP: Return result.data so Online.vue gets the array, not the object
+            return result.data || []; 
         } catch (err) {
             error.value = err.message;
-            console.error("Fetch Error:", err);
+            return null;
         } finally {
             isLoading.value = false;
         }
     };
 
-    /**
-     * Writes data to the current active sheet
-     * @param {string} range - e.g., 'A1:B1'
-     * @param {Array[]} data - e.g., [['Value1', 'Value2']]
-     */
-    const updateData = async (range, data) => {
+    const updateData = async (range, data, targetSheet = null) => {
         isLoading.value = true;
         error.value = null;
-
         try {
-            // Your script expects URL-encoded parameters, not a JSON body
             const formData = new URLSearchParams();
-            formData.append('sheetName', currentPage.value);
+            formData.append('sheetName', targetSheet || currentPage.value);
             formData.append('range', range);
             formData.append('dataToSend', JSON.stringify(data));
 
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             });
 
             const result = await response.json();
@@ -65,16 +54,11 @@ export function useGoogleSheet() {
             return result;
         } catch (err) {
             error.value = err.message;
-            console.error("Update Error:", err);
+            throw err;
         } finally {
             isLoading.value = false;
         }
     };
 
-    return {
-        fetchData,
-        updateData,
-        isLoading,
-        error
-    };
+    return { fetchData, updateData, isLoading, error };
 }

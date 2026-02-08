@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div class="card-image">
-      <img v-if="data[3]" :src="data[3]" alt="Portfolio Thumbnail" />
-      <div v-else class="placeholder">No Image</div>
+        <img v-if="data && data[3]" :src="data[3]" alt="Portfolio Thumbnail" />
+        <div v-else class="placeholder">No Image</div>
     </div>
 
     <div class="card-info">
@@ -28,11 +28,16 @@ defineProps({
   padding: 10px;
   border-radius: 8px;
   min-height: 400px;
+  overflow: hidden;
+}
+.card-image * {
+    overflow: hidden;
 }
 .card-image img {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  overflow: hidden;
 }
 .placeholder {
   height: 150px;
@@ -40,5 +45,6 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 </style>
