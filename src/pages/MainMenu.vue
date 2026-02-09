@@ -11,7 +11,7 @@
             <CategoryCard 
             title="online" 
             icon="⛺" 
-            :image="imagess"
+            :image="image_online"
             :is-active="selected === 'online'"
             @clicked="setPage('online')"
             />
@@ -19,7 +19,7 @@
             <CategoryCard 
             title="onsite" 
             icon="⛺" 
-            :image="imagess"
+            :image="image_onsite"
             :is-active="selected === 'onsite'"
             @clicked="setPage('onsite')"
             />
@@ -27,7 +27,7 @@
             <CategoryCard 
             title="openhouse" 
             icon="⛺" 
-            :image="imagess"
+            :image="image_openhouse"
             :is-active="selected === 'openhouse'"
             @clicked="setPage('openhouse')"
             />
@@ -35,7 +35,7 @@
             <CategoryCard 
             title="guide" 
             icon="⛺" 
-            :image="imagess"
+            :image="image_oguide"
             :is-active="selected === '0guide'"
             @clicked="setPage('oguide')"
             />
@@ -52,6 +52,10 @@
 <script setup>
 
     import imagess from '/images/icon.png';
+    import image_online     from '/images/cartoons/online.png';
+    import image_onsite     from '/images/cartoons/onsite.png';
+    import image_openhouse  from '/images/cartoons/openhouse.png';
+    import image_oguide     from '/images/cartoons/oguide.png';
 
     import CategoryCard from '@/components/CategoryCard.vue';
 
